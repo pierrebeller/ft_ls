@@ -49,7 +49,7 @@ static int		ft_total_blocks(char **tab)
 	while (tab[i])
 	{
 		if (lstat(tab[i++], &stats) < 0)
-			ft_perror(ft_strdup("ft_ls "));
+			ft_perror(ft_strdup(tab[i - 1]));
 		ret += (int)stats.st_blocks;
 	}
 	return (ret);

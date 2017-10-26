@@ -37,7 +37,7 @@ int		ft_nbrdir(const char **av, int ac)
 	nbr = 0;
 	while (i < ac)
 	{
-		if(is_dir(av[i]) || !av[i])
+		if(is_dir_stat(av[i]) || !av[i])
 			nbr++;
 		i++;
 	}

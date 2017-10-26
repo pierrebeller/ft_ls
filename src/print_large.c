@@ -39,6 +39,7 @@ void		ft_colored_output(const char *path, char *flags, mode_t st_mode)
 	else
 		ft_putstr(ft_data_name(path));
 }
+
 int			ft_putnbr_ret_space(int nbr)
 {
 	int 	ret;
@@ -79,7 +80,6 @@ void		print_bc(const char *path, t_pad padding)
 	ft_putchar(',');
 	ret = ft_putnbr_ret_space(ft_data_minor(path));
 	ft_putxchar(' ', (padding.b_size / 2) + (padding.b_size % 2) - ret);
-	ft_putchar(',');
 }
 
 void		ft_print_large(const char *path, char *flags, t_pad padding)

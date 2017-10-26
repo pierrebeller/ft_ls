@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+#include <stdio.h>
 
 static char	*add_path_tab(char *dest, const char *p, const char *d)
 {
@@ -19,7 +20,7 @@ static char	*add_path_tab(char *dest, const char *p, const char *d)
 
 	i = 0;
 	j = 0;
-	dest = (char *)ft_x_malloc(sizeof(char) * ft_strlen(p) + ft_strlen(p) + 2);
+	dest = (char *)ft_x_malloc(sizeof(char) * ft_strlen(p) + ft_strlen(d) + 2);
 	while (p[i])
 		dest[j++] = p[i++];
 	dest[j++] = '/';
@@ -37,7 +38,7 @@ static void	rec_disp(char **tab, char *flags, int dir_nrb)
 	i = 0;
 	while (tab[i])
 	{
-		if (!is_link(tab[i]) && is_dir(tab[i]) && ft_strcmp(ft_data_name(\
+		if (!is_link(tab[i]) && is_dir_stat(tab[i]) && ft_strcmp(ft_data_name(\
 			tab[i]), ".") && ft_strcmp(ft_data_name(tab[i]), ".."))
 		{
 			ft_putchar('\n');
@@ -51,7 +52,7 @@ static void	rec_disp(char **tab, char *flags, int dir_nrb)
 
 int			last_dir_pos(const char **av, int ac)
 {
-	DIR		*is_dir;
+	DIR		*is_dir_stat;
 	int		pos;
 	int		i;
 
@@ -59,9 +60,9 @@ int			last_dir_pos(const char **av, int ac)
 	pos = 0;
 	while (i < ac)
 	{
-		if ((is_dir = opendir(av[i])))
+		if ((is_dir_stat = opendir(av[i])))
 		{
-			closedir(is_dir);
+			closedir(is_dir_stat);
 			pos = i;
 		}
 		i++;
@@ -85,8 +86,10 @@ int			disp_dir(const char *path, char *flags, int dir_nrb)
 	DIR		*rep;
 	t_dir	*file;
 	char	**tab;
+	int		i;
 
-	if (!(rep = ft_opendir(path)))
+	i = 0;
+	if (!(rep = opendir(path)))
 		return (0);
 	tab = tab_init(nbr_file(path, is_a_or_f(flags)));
 	if (nbr_file(path, is_a_or_f(flags)) == 0)

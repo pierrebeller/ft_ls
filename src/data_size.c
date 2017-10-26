@@ -38,7 +38,7 @@ int			ft_data_minor(const char *path)
 
 	if (lstat(path, &stats) < 0)
 		ft_perror(ft_strdup("ft_ls "));
-	return (minor(stats.st_size));
+	return (minor(stats.st_rdev));
 }
 
 int			ft_data_major(const char *path)
@@ -47,7 +47,7 @@ int			ft_data_major(const char *path)
 
 	if (lstat(path, &stats) < 0)
 		ft_perror(ft_strdup("ft_ls "));
-	return (major(stats.st_size));
+	return (major(stats.st_rdev));
 }
 
 char		*ft_data_size(const char *path, int len)

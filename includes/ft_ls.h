@@ -67,6 +67,7 @@ char		ft_data_type(mode_t type);
 int			is_b_or_c(const char *path);
 int			is_link(const char *path);
 int			is_dir(const char *path);
+int			is_dir_stat(const char *path);
 
 int			last_dir_pos(const char **av, int ac);
 char		**put_in_tab(char **tab, const char *path, char *name);

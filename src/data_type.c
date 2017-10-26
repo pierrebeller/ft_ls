@@ -55,17 +55,29 @@ int			is_link(const char *path)
 	return (0);
 }
 
-int			is_dir(const char *path)
+int			is_dir_stat(const char *path)
 {
-	DIR		*is_dir;
+	DIR		*is_dir_stat;
 
-	is_dir = opendir(path);
-	if (!is_dir)
+	is_dir_stat = opendir(path);
+	if (is_dir_stat)
 	{
-		closedir(is_dir);
+		closedir(is_dir_stat);
 		return (1);
 	}
 	if (errno == EACCES)
+		return (1);
+	return (0);
+}
+
+int			is_dir_stat_stat(const char *path)
+{
+	t_stat	stats;
+
+
+	if (lstat(path, &stats) < 0)
+		ft_perror(ft_strdup("ft_ls "));
+	if (ft_data_type(stats.st_mode & S_IFMT) == 'd')
 		return (1);
 	return (0);
 }

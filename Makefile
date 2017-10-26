@@ -21,7 +21,7 @@ SRC 	= 	data_id.c\
 OBJ = $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 FT = ./libft/
 FT_LIB = $(addprefix $(FT),libft.a))
@@ -44,7 +44,7 @@ $(FT_LIB):
 		make -C $(FT)
 
 $(NAME) : $(OBJ)
-	$(CC) $(OBJ) $(FT_LNK) -lm -o $(NAME)
+	$(CC) -g3 -fsanitize=address $(OBJ) $(FT_LNK) -lm -o $(NAME)
 	
 clean:
 	rm -rf $(OBJDIR)

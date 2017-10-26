@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbeller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/25 12:57:38 by pbeller           #+#    #+#             */
-/*   Updated: 2017/10/25 12:57:40 by pbeller          ###   ########.fr       */
+/*   Created: 2017/10/25 12:57:38 by pbeller            #+#    #+#             */
+/*   Updated: 2017/10/25 12:57:40 by pbeller           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ char		**tab_init(int size)
 	int		i;
 
 	i = 0;
-	tab = (char **)ft_x_malloc(sizeof(char *) * (size + 1));
+	if (!(tab = (char **)ft_memalloc(sizeof(char *) * (size + 1))))
+	{
+		perror("ft_ls : ");
+		exit(-1);
+	}
 	while (i < size)
 		tab[i++] = NULL;
 	tab[i] = NULL;
