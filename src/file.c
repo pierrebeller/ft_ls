@@ -23,7 +23,7 @@ int		llnbr_len(long long nbr)
 		if (nbr != 0)
 			ret++;
 		else
-			break;
+			break ;
 	}
 	return (ret);
 }
@@ -37,7 +37,7 @@ int		ft_nbrdir(const char **av, int ac)
 	nbr = 0;
 	while (i < ac)
 	{
-		if(is_dir_stat(av[i]) || !av[i])
+		if (is_dir(av[i]) || !av[i])
 			nbr++;
 		i++;
 	}
@@ -61,7 +61,7 @@ int		nbr_file(const char *path, int a)
 		nbr++;
 	}
 	if (closedir(rep) < 0)
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	return (nbr);
 }
 
@@ -70,7 +70,7 @@ DIR		*ft_opendir(const char *path)
 	DIR	*ret;
 
 	ret = opendir(path);
-	if(!ret)
+	if (!ret)
 	{
 		if (errno == EACCES)
 		{

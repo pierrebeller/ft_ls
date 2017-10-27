@@ -48,7 +48,7 @@ char		*ft_data_wrx(const char *path)
 	buff = (char *)ft_memalloc(sizeof(char) * 100);
 	buff[99] = '\0';
 	if (lstat(path, &stats) < 0)
-		ft_perror(ft_strdup("ft_ls "));
+		ft_perror(ft_strdup("ft_ls data wrx "));
 	rights = stats.st_mode;
 	if (readlink(path, buff, 100) < 0)
 		tmp = ft_chrjoinfree(ft_strdup(""), ft_data_type(rights & S_IFMT), 1);

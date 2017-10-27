@@ -17,7 +17,7 @@ long		ft_data_mtime(const char *path)
 	t_stat	stats;
 
 	if (lstat(path, &stats) < 0)
-		ft_perror(ft_strdup("ft_ls "));
+		ft_perror(ft_strdup("ft_ls data mtime "));
 	return ((long)stats.st_mtimespec.tv_sec);
 }
 
@@ -63,7 +63,7 @@ char		*ft_data_date(const char *path)
 
 	nowaday = NULL;
 	if (lstat(path, &stats) < 0)
-		ft_perror(ft_strdup("ft_ls "));
+		ft_perror(ft_strdup("ft_ls data date "));
 	date = ctime(&stats.st_mtimespec.tv_sec);
 	if ((long)time(nowaday) - (long)stats.st_mtimespec.tv_sec > 15778800)
 		return (ft_years(date));

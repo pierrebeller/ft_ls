@@ -36,7 +36,7 @@ int			is_b_or_c(const char *path)
 	t_stat	stats;
 
 	if (lstat(path, &stats) < 0)
-		ft_perror(ft_strdup("ft_ls "));
+		ft_perror(ft_strdup("ft_ls b or c "));
 	if (ft_data_type(stats.st_mode & S_IFMT) == 'b')
 		return (1);
 	if (ft_data_type(stats.st_mode & S_IFMT) == 'c')
@@ -49,13 +49,13 @@ int			is_link(const char *path)
 	t_stat	stats;
 
 	if (lstat(path, &stats) < 0)
-		ft_perror(ft_strdup("ft_ls "));
+		ft_perror(ft_strdup("ft_ls is link "));
 	if (ft_data_type(stats.st_mode & S_IFMT) == 'l')
-		return(1);
+		return (1);
 	return (0);
 }
 
-int			is_dir_stat(const char *path)
+int			is_dir(const char *path)
 {
 	DIR		*is_dir_stat;
 
@@ -70,13 +70,12 @@ int			is_dir_stat(const char *path)
 	return (0);
 }
 
-int			is_dir_stat_stat(const char *path)
+int			is_dir_stat(const char *path)
 {
 	t_stat	stats;
 
-
 	if (lstat(path, &stats) < 0)
-		ft_perror(ft_strdup("ft_ls "));
+		ft_perror(ft_strdup("ft_ls is dir stat "));
 	if (ft_data_type(stats.st_mode & S_IFMT) == 'd')
 		return (1);
 	return (0);

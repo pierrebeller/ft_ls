@@ -14,7 +14,7 @@
 
 int			is_a_or_f(char *flags)
 {
-	if(flags)
+	if (flags)
 	{
 		if (ft_strchr(flags, 'a'))
 			return (1);
@@ -31,7 +31,7 @@ static int	is_valid_flag(char c)
 	int		ret;
 
 	ret = 0;
-	if (c == 'l' || c == 'a' || c == 'g' ||c == 'r' || c == 't' || c == 'S' ||\
+	if (c == 'l' || c == 'a' || c == 'g' || c == 'r' || c == 't' || c == 'S' ||\
 		c == 'R' || c == '1' || c == 'f' || c == 'G' || c == 'd')
 		return (1);
 	return (0);
@@ -49,8 +49,8 @@ int			get_flags(const char **argv, char **flags)
 		{
 			j = 1;
 			while (is_valid_flag(argv[i][j]))
-				(*flags)= ft_chrjoinfree((*flags), argv[i][j++], 1);
-			if (argv[i][j] ==  '-' && !argv[i][j + 1])
+				(*flags) = ft_chrjoinfree((*flags), argv[i][j++], 1);
+			if (argv[i][j] == '-' && !argv[i][j + 1])
 				return ((argv[i + 1] ? i + 1 : -1));
 			else if (argv[i][j])
 				ft_error(ft_chrjoinfree("illegal flag -- ", argv[i][j], 0), 1);

@@ -34,17 +34,26 @@ static char	*add_path_tab(char *dest, const char *p, const char *d)
 static void	rec_disp(char **tab, char *flags, int dir_nrb)
 {
 	int		i;
+	t_stat	stats;
 
 	i = 0;
 	while (tab[i])
 	{
-		if (!is_link(tab[i]) && is_dir_stat(tab[i]) && ft_strcmp(ft_data_name(\
-			tab[i]), ".") && ft_strcmp(ft_data_name(tab[i]), ".."))
+		if (lstat(tab[i], &stats) < 0)
 		{
-			ft_putchar('\n');
-			ft_putstr(tab[i]);
-			ft_putstr(":\n");
-			disp_dir(tab[i], flags, dir_nrb);
+			perror("ft_ls ");
+			i++;
+		}
+		if (is_dir(tab[i]) && (stats.st_mode & S_IXUSR))
+		{
+			if (!is_link(tab[i]) && is_dir(tab[i]) && ft_strcmp(\
+			ft_data_name(tab[i]), ".") && ft_strcmp(ft_data_name(tab[i]), ".."))
+			{
+				ft_putchar('\n');
+				ft_putstr(tab[i]);
+				ft_putstr(":\n");
+				disp_dir(tab[i], flags, dir_nrb);
+			}
 		}
 		i++;
 	}
@@ -52,7 +61,7 @@ static void	rec_disp(char **tab, char *flags, int dir_nrb)
 
 int			last_dir_pos(const char **av, int ac)
 {
-	DIR		*is_dir_stat;
+	DIR		*is_dir;
 	int		pos;
 	int		i;
 
@@ -60,9 +69,9 @@ int			last_dir_pos(const char **av, int ac)
 	pos = 0;
 	while (i < ac)
 	{
-		if ((is_dir_stat = opendir(av[i])))
+		if ((is_dir = opendir(av[i])))
 		{
-			closedir(is_dir_stat);
+			closedir(is_dir);
 			pos = i;
 		}
 		i++;
@@ -90,7 +99,7 @@ int			disp_dir(const char *path, char *flags, int dir_nrb)
 
 	i = 0;
 	if (!(rep = opendir(path)))
-		return (0);
+		return (ft_ret_perror("ft_ls "));
 	tab = tab_init(nbr_file(path, is_a_or_f(flags)));
 	if (nbr_file(path, is_a_or_f(flags)) == 0)
 		ft_putstr("(empty directory)\n");

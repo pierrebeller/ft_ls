@@ -17,8 +17,6 @@ int			ft_error(const char *str, int usage)
 	ft_putstr("ft_ls : ");
 	ft_putstr(str);
 	ft_putchar('\n');
-	if (str)
-		ft_memdel((void **)&str);
 	if (usage)
 		ft_putstr("usage : ft_ls [-1adfgGlrRSt] [file ...]\n");
 	exit(EXIT_FAILURE);
@@ -54,7 +52,20 @@ int			check_input(const char *path, char *flags)
 void		ft_perror(const char *str)
 {
 	perror(str);
-	if (str)
-		ft_memdel((void **)&str);
 	exit(EXIT_FAILURE);
+}
+
+int			ft_ret_perror(const char *str)
+{
+	perror(str);
+	return (0);
+}
+
+int			ft_stats(const char *path)
+{
+	t_stat	stats;
+
+	if (lstat(path, &stats) < 0)
+		return (0);
+	return (1);
 }

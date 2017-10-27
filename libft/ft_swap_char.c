@@ -20,4 +20,3 @@ void	ft_swap_char(char **chr1, char **chr2)
 	*chr1 = *chr2;
 	*chr2 = swap;
 }
-

@@ -42,7 +42,7 @@ void		ft_colored_output(const char *path, char *flags, mode_t st_mode)
 
 int			ft_putnbr_ret_space(int nbr)
 {
-	int 	ret;
+	int		ret;
 	char	*str;
 	int		i;
 
@@ -53,12 +53,11 @@ int			ft_putnbr_ret_space(int nbr)
 	ft_putstr(str);
 	free(str);
 	return (ret);
-
 }
 
 int			ft_putnbr_ret(int nbr)
 {
-	int 	ret;
+	int		ret;
 	char	*str;
 	int		i;
 
@@ -68,7 +67,6 @@ int			ft_putnbr_ret(int nbr)
 	ft_putstr(str);
 	free(str);
 	return (ret);
-
 }
 
 void		print_bc(const char *path, t_pad padding)

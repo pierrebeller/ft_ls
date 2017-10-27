@@ -18,7 +18,7 @@ int			ft_data_nlink(const char *path)
 	int		ret;
 
 	if (lstat(path, &stats) < 0)
-		ft_perror(ft_strdup("ft_ls "));
+		ft_perror(ft_strdup("ft_ls data nlink "));
 	ret = (int)stats.st_nlink;
 	return (ret);
 }
@@ -60,7 +60,7 @@ char		*ft_data_uid(const char *path, int len)
 	int		i;
 
 	if (lstat(path, &stats) < 0)
-		ft_perror(ft_strdup("ft_ls "));
+		ft_perror(ft_strdup("ft_ls data uid "));
 	i = 0;
 	if (!(usr = getpwuid(stats.st_uid)))
 	{
@@ -88,7 +88,7 @@ char		*ft_data_gid(const char *path, int len)
 	int		i;
 
 	if (lstat(path, &stats) < 0)
-		ft_perror(ft_strdup("ft_ls "));
+		ft_perror(ft_strdup("ft_ls data gid "));
 	i = 0;
 	if (!(grp = getgrgid(stats.st_gid)))
 	{
@@ -107,4 +107,3 @@ char		*ft_data_gid(const char *path, int len)
 	ret[i] = '\0';
 	return (ret);
 }
-

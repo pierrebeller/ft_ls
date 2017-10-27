@@ -101,16 +101,17 @@ CFLAGS = -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	ar rc $(NAME) $(OBJ) && ranlib libft.a
+	@ ar rc $(NAME) $(OBJ) && ranlib libft.a
+	@ echo "libft compiled"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $<
+	@ $(CC) $(CFLAGS) -c $<
 
 clean :
-	rm -f $(OBJ)
+	@ rm -f $(OBJ)
 
 fclean : clean
-	rm -f $(NAME)
+	@ rm -f $(NAME)
 
 re : fclean all
 

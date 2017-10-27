@@ -40,7 +40,7 @@ static int	file_number(const char **av, int ac, char *flags, int index)
 	len = 0;
 	while (index + i < ac)
 	{
-		if ((!is_dir_stat(av[index + i]) || ft_strchr(flags, 'd') ||\
+		if ((!is_dir(av[index + i]) || ft_strchr(flags, 'd') ||\
 		(is_link(av[index + i]) && ft_strchr(flags, 'l'))) && av[index + i])
 			len++;
 		i++;
@@ -61,7 +61,7 @@ static void	single_file(const char **av, int ac, char *flags, int index)
 		tab = tab_init(len);
 		while (index + i < ac)
 		{
-			if ((!is_dir_stat(av[index + i]) || ft_strchr(flags, 'd')||\
+			if ((!is_dir(av[index + i]) || ft_strchr(flags, 'd') ||\
 			(is_link(av[index + i]) && ft_strchr(flags, 'l'))) && av[index + i])
 				ft_stock(tab, (char *)(av[index + i]));
 			i++;
@@ -88,7 +88,7 @@ static void	find_files(const char **av, int ac, char *flags, int n)
 	{
 		while (n < ac)
 		{
-			if (is_dir_stat(av[n]) && !(is_link(av[n]) && ft_strchr(flags, 'l')))
+			if (is_dir(av[n]) && !(is_link(av[n]) && ft_strchr(flags, 'l')))
 			{
 				ft_putstr(av[n]);
 				ft_putstr(":\n");
@@ -114,7 +114,7 @@ int			main(int ac, const char **av)
 		disp_dir(".", flags, 0);
 		return (ft_free_ret(flags, 0));
 	}
-	else 
+	else
 		dir = get_flags(av, &flags);
 	if (dir < 0)
 	{

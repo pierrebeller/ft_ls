@@ -48,14 +48,14 @@ static int		ft_total_blocks(char **tab)
 	ret = 0;
 	while (tab[i])
 	{
-		if (lstat(tab[i++], &stats) < 0)
-			ft_perror(ft_strdup(tab[i - 1]));
-		ret += (int)stats.st_blocks;
+		if (lstat(tab[i], &stats) >= 0)
+			ret += (int)stats.st_blocks;
+		i++;
 	}
 	return (ret);
 }
 
-void		print_pad_4d(int data)
+void			print_pad_4d(int data)
 {
 	int	len;
 
@@ -82,21 +82,23 @@ void		print_pad_4d(int data)
 	ft_putchar(' ');
 }
 
-void		print_sort2(char **tab, char *flags, int i, t_pad padding)
+void			print_sort2(char **tab, char *flags, int i, t_pad padding)
 {
 	char	*buffer;
 	t_stat	stats;
+	int		len;
 
-	buffer = (char *)ft_memalloc(sizeof(char) * 100);
+	len = ft_strlen(tab[i]);
+	buffer = (char *)ft_memalloc(sizeof(char) * len + 1);
 	if (!buffer)
 		ft_perror(ft_strdup("ft_ls "));
-	buffer[99] = '\0';
+	buffer[len] = '\0';
 	if (lstat(tab[i], &stats) < 0)
 		ft_perror(ft_strdup("ft_ls "));
 	if (ft_strchr(flags, 'l') || ft_strchr(flags, 'g'))
 		ft_print_large(tab[i], flags, padding);
 	ft_colored_output(tab[i], flags, stats.st_mode);
-	if (readlink(tab[i++], buffer, 100) > 0 && ft_strchr(flags, 'l'))
+	if (readlink(tab[i++], buffer, len) > 0 && ft_strchr(flags, 'l'))
 	{
 		ft_putstr(" -> ");
 		ft_putstr(buffer);
@@ -105,7 +107,7 @@ void		print_sort2(char **tab, char *flags, int i, t_pad padding)
 	free(buffer);
 }
 
-void		print_sort(char **tab, char *flags, int single)
+void			print_sort(char **tab, char *flags, int single)
 {
 	t_pad	padding;
 	int		i;
@@ -119,5 +121,9 @@ void		print_sort(char **tab, char *flags, int single)
 	}
 	padding = ft_padding(tab);
 	while (tab[i])
-		print_sort2(tab, flags, i++, padding);
+	{
+		if (ft_stats(tab[i]))
+			print_sort2(tab, flags, i, padding);
+		i++;
+	}
 }

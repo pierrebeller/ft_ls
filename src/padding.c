@@ -24,7 +24,7 @@ static int	padding_uid(char **tab)
 	while (tab[i])
 	{
 		if (lstat(tab[i++], &stats) < 0)
-			ft_perror(ft_strdup("ft_ls "));
+			i++;
 		usr = getpwuid(stats.st_uid);
 		if (!usr)
 		{
@@ -49,7 +49,7 @@ static int	padding_gid(char **tab)
 	while (tab[i])
 	{
 		if (lstat(tab[i++], &stats) < 0)
-			ft_perror(ft_strdup("ft_ls "));
+			i++;
 		grp = getgrgid(stats.st_gid);
 		if (!grp)
 		{
@@ -59,7 +59,7 @@ static int	padding_gid(char **tab)
 		else if (ret < (int)ft_strlen(grp->gr_name))
 			ret = (int)ft_strlen(grp->gr_name);
 	}
-	return(ret);
+	return (ret);
 }
 
 static int	pad_size(char **tab)
@@ -73,7 +73,9 @@ static int	pad_size(char **tab)
 	while (tab[i])
 	{
 		if (lstat(tab[i], &stats) < 0)
-			ft_perror(ft_strdup("ft_ls "));
+			i++;
+		if (!tab[i])
+			break ;
 		if (is_b_or_c(tab[i]))
 		{
 			if (ret < ft_len_min_max(tab[i]))
