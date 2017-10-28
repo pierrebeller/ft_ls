@@ -119,11 +119,13 @@ void			print_sort(char **tab, char *flags, int single)
 		ft_putnbr(ft_total_blocks(tab));
 		ft_putchar('\n');
 	}
-	padding = ft_padding(tab);
 	while (tab[i])
 	{
 		if (ft_stats(tab[i]))
+		{
+			padding = ft_padding(tab);
 			print_sort2(tab, flags, i, padding);
+		}
 		i++;
 	}
 }

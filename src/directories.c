@@ -41,11 +41,12 @@ static void	rec_disp(char **tab, char *flags, int dir_nrb)
 	{
 		if (lstat(tab[i], &stats) < 0)
 		{
-			perror("ft_ls ");
+			perror("ft_ls rec_disp");
 			i++;
 		}
 		if (is_dir(tab[i]) && (stats.st_mode & S_IXUSR))
 		{
+
 			if (!is_link(tab[i]) && is_dir(tab[i]) && ft_strcmp(\
 			ft_data_name(tab[i]), ".") && ft_strcmp(ft_data_name(tab[i]), ".."))
 			{
@@ -95,9 +96,7 @@ int			disp_dir(const char *path, char *flags, int dir_nrb)
 	DIR		*rep;
 	t_dir	*file;
 	char	**tab;
-	int		i;
-
-	i = 0;
+	
 	if (!(rep = opendir(path)))
 		return (ft_ret_perror("ft_ls "));
 	tab = tab_init(nbr_file(path, is_a_or_f(flags)));
