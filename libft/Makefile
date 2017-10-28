@@ -102,7 +102,6 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@ ar rc $(NAME) $(OBJ) && ranlib libft.a
-	@ echo "libft compiled"
 
 %.o: %.c
 	@ $(CC) $(CFLAGS) -c $<
